@@ -1,6 +1,44 @@
 #startInfos {
 text-align: center;
 }
-.the-icons, .the-buttons {
-  list-style: none;
+table {
+        width: 100%;
+    }
+
+thead, tbody, tr, td, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
 }
+
+.space100 {
+    padding-top: 100px;
+
+    /*text-align: left;*/
+}
+thead th {
+    height: 30px;
+
+    /*text-align: left;*/
+}
+
+tbody {
+    height: 420px;
+    overflow-y: auto;
+}
+
+thead {
+    /* fallback */
+}
+
+
+tbody td, thead th {
+    width: 25%;
+    float: left;
+}
+#scrolling-table {
+  /width: 756px;
+  }

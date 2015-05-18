@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <script src="https://cdn.blockspring.com/blockspring.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <title>Nootropics Help</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">Nootropics Help</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden">
+                    <a class="page-scroll" href="#page-top">Start</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#area">Which Area?</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#list">List</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#availability">Availability</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+<!-- Intro Section -->
+<section id="intro" class="space100">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-lg-12 text-center">
+                <h1>
+                    <i class="glyphicon glyphicon-grain"></i><br>NOOTROPICS</h1>
+                </div>
+
+                <div class="col-lg-4 text-center">
+                    <!--Empty Space for Center!-->
+                    </div>
+
+                <div class="col-lg-4 text-center">
+
+                    <script>
+                        blockspring.runParsed("query-google-spreadsheet", {
+                                    "query": "SELECT A,B,C,D,E,F,G,H,I",
+                                    "url": "https://docs.google.com/spreadsheets/d/1u2OK8tLtrUQRf6CoT5iqA8f7766AKA_Z3a0MDjcY2_I/edit#gid=779395260"
+                                },
+                                {"api_key": "br_2758_403ce8491d2c97b9cec6291dc4faae8c4342e23f"}, function (res) {
+                                    var ar = res.params.data;
+                                    for (var i = 0; i < ar.length - 1; i++) {
+                                        var obj = ar[i];
+                                        $('#searchBody').append('<tr data-id="' + obj.id + '" data-name="' + obj.Name + '">' +
+                                                '<td><a id="modalPopUp" href="javascript:" data-toggle="modal" data-target="#myModal">' + obj.Name + '</a></td>' +
+                                                '<td>'+ obj.Benefits + '</td><td>'+ obj.Comments + '</td>' +
+                                                '<td class="hidden" data-negatives="">'+ obj.negatives + '</td>' +
+                                                '<td class="hidden" data-dose="">Low:'+ obj.LowDailyDose + ', High:' +obj.HighDailyDose + '</td>' +
+                                                '<td>Click Here</td></tr>')
+                                        var len = $('#searchBody tr').length;
+                                    }
+
+                                    $('#search').click(function () {
+                                        var searched = $('#term').val();
+                                        $('#searchedTerm').text(searched);
+                                        $("#searchBody tr").each(function (index) {
+                                            //console.log(obj.Name);
+
+                                            var attr = $(this).attr('data-name');
+                                            // For some browsers, `attr` is undefined; for others,
+                                            // `attr` is false.  Check for both.
+                                            if ((typeof attr !== typeof undefined && attr !== false) && (attr == searched)) {
+                                                $(this).show();
+                                                console.log(attr);
+                                            } else {
+                                                $(this).hide();
+                                            }
+                                        });
+                                    })
+                                    $('#modalPopUp').click(function () {
+                                        $('#myModalLabel').text($(this).text());
+                                    })
+                                });
+                    </script>
+                    <div class="input-group">
+                        <input id="term" type="text" class="form-control" placeholder="ex: Modafinil">
+					  <span class="input-group-btn">
+						<button id="search" class="btn btn-default" type="button">Go!</button>
+					  </span>
+                    </div>
+                    <!-- /input-group -->
+                </div>
+            </div>
+            <div class="col-md-12">
+
+
+                <div id="scrolling-table">
+                    <table class="table table-hover text-left">
+                        <thead>
+                        <tr>
+                            <th><p class="hidden-xs">Supplements, Herbs, & Drugs</p></th>
+                            <th>Benefits</th>
+                            <th>Comments</th>
+                            <th>Availability</th>
+                        </tr>
+                        </thead>
+                        <tbody id="searchBody">
+                        <!--
+                        Results Get Added Here
+                        -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Bacopa Monnieri</h4>
+                            </div>
+                            <div class="modal-body text-left">
+                                <p><b>Summary:</b></p>
+
+                                <p>Bacopa Monnieri is an herb which has been used in Ayurvedic medicine for centuries.
+                                    It's
+                                    currently one of the most well tested nootropics. A 2012 review of 6 trials on
+                                    Bacopa
+                                    Monnieri noted large and statistically significant memory enhancing effects.[27][28]
+                                    Bacopa's primary mechanism of action is still unclear, it seems be an anti-oxidant,
+                                    a
+                                    weak acetylcholinesterase inhibitor, a cerebral blood flow activator and
+                                    neurotransmitter modulator.[29] In animal models, Bacopa Monnieri seems to increase
+                                    cortical concentrations of acetylcholine, dopamine and serotonin.[197] Bacopa
+                                    Monnieri
+                                    is likely to be one of the safest and most effective memory enhancers.
+                                </p>
+
+                                <p>
+                                    <b>Standard Dose:</b></p>
+
+                                <p>
+                                    300mg assuming 50% bacosides once in the morning or 750mg assuming 20% bacosides
+                                </p>
+
+                                <p>
+                                    (Note: Bacopa Monnieri's memory enhancing effects appear with long-term continuous
+                                    use,
+                                    8 weeks is a good minimum trial period)
+                                </p></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About Section -->
+<section id="availability" class="about-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Availability</h2>
+
+                <div class="row">
+                    <div class="col-md-4"><a><h2><img style="width:300px;"
+                                                      src="http://www.rgtsittingbourne.co.uk/wp-content/uploads/2008/06/button-_amazon.png">Amazon
+                    </h2></a></div>
+                    <div class="col-md-4"><a><h2><img style="width:300px;"
+                                                      src="http://cdn2.bigcommerce.com/server2700/htchdgxs/product_images/logo_small_b_1429812596__34312.gif">Ceretropic
+                    </h2></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scrolling Nav JavaScript -->
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
